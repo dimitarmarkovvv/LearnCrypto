@@ -13,12 +13,13 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
-import { Header } from '../components/ui/Header.jsx';
-import PriceChart from '../components/ui/PriceChart.jsx';
-import CoinIcon from '../components/ui/CoinIcon.jsx';
-import { useCryptoPrices } from '../hooks/useCryptoPrices.js';
-import { useCryptoHistory } from '../hooks/useCryptoHistory.js';
-import { CATEGORIES, COINS, formatPrice } from '../constants/coins.js';
+import { Header } from '../../components/ui/Header.jsx';
+import PriceChart from '../../components/ui/PriceChart.jsx';
+import CoinIcon from '../../components/ui/CoinIcon.jsx';
+import { useCryptoPrices } from '../../hooks/useCryptoPrices.js';
+import { useCryptoHistory } from '../../hooks/useCryptoHistory.js';
+import { CATEGORIES, COINS, formatPrice } from '../../constants/coins.js';
+import './ChartsPage.css';
 
 const RANGES = [
     { value: '1h:24', label: 'Last 24 hours' },
@@ -37,21 +38,21 @@ function CoinCard({ symbol, name, brandColor, points, live }) {
     return (
         <Card.Root as="article">
             <Card.Body>
-                <Flex justify="space-between" align="start" mb={4}>
-                    <Flex align="center" gap="3">
+                <Flex className="charts-page__coin-header">
+                    <Flex className="charts-page__coin-name">
                         <CoinIcon symbol={symbol} color={brandColor} />
 
                         <Box>
                             <Heading size="md">{symbol.replace('USDT', '')}</Heading>
 
-                            <Text fontSize="sm" color="fg.muted">
+                            <Text className="charts-page__coin-subtitle">
                                 {name}
                             </Text>
                         </Box>
                     </Flex>
 
-                    <Box textAlign="right">
-                        <Text fontSize="xl" fontWeight="bold">
+                    <Box className="charts-page__coin-price">
+                        <Text className="charts-page__coin-price-value">
                             {live ? `$${formatPrice(live.price)}` : '—'}
                         </Text>
 
@@ -77,14 +78,14 @@ function ChartsPage() {
     const { history, loading } = useCryptoHistory(interval, Number(limit));
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="charts-page">
             <Header />
 
-            <Flex justify="space-between" align="center" mt={8} mb={6} gap="4">
-                <Flex align="center" gap="3">
+            <Flex className="charts-page__toolbar">
+                <Flex className="charts-page__toolbar-start">
                 </Flex>
 
-                <NativeSelect.Root size="sm" maxW="180px">
+                <NativeSelect.Root size="sm" className="charts-page__range">
                     <NativeSelect.Field
                         value={range}
                         onChange={(event) => setRange(event.target.value)}
@@ -100,24 +101,18 @@ function ChartsPage() {
             </Flex>
             
             {loading ? (
-                <Center py={20}>
+                <Center className="charts-page__loading">
                     <Spinner size="lg" />
                 </Center>
             ) : (
-                <Stack gap="10">
+                <Stack className="charts-page__categories">
                     {CATEGORIES.map(({ id, label }) => (
                         <Box key={id} as="section">
-                            <Heading
-                                size="sm"
-                                textTransform="uppercase"
-                                letterSpacing="wider"
-                                color="fg.muted"
-                                mb="4"
-                            >
+                            <Heading size="sm" className="charts-page__category-title">
                                 {label}
                             </Heading>
 
-                            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap="6">
+                            <SimpleGrid className="charts-page__grid">
                                 {COINS.filter((coin) => coin.category === id).map(
                                     ({ symbol, name, color }) => (
                                         <CoinCard

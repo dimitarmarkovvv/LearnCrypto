@@ -1,22 +1,23 @@
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getForumStats, getMostCommentedPosts, getRecentPosts } from '../services/homepage';
-import { formatDate } from '../utils/formatDate.js'
+import { getForumStats, getMostCommentedPosts, getRecentPosts } from '../../services/homepage';
+import { formatDate } from '../../utils/formatDate.js'
 import { Box, Card, Center, Container, Flex, Grid, Heading, SimpleGrid, Spinner, Stack, Text, Link } from '@chakra-ui/react';
-import { CryptoTicker } from '../components/ui/CryptoTicker.jsx';
-import { Header } from '../components/ui/Header.jsx';
+import { CryptoTicker } from '../../components/ui/CryptoTicker.jsx';
+import { Header } from '../../components/ui/Header.jsx';
 import { LuNewspaper, LuUsers, LuMessageSquare, LuChartNoAxesColumn } from 'react-icons/lu';
+import './Homepage.css';
 
-function StatRow({ icon, color, label, value }) {
+function StatRow({ icon, tone, label, value }) {
     return (
-        <Flex justify="space-between" align="center">
-            <Flex align="center" gap="3">
-                <Box color={color} fontSize="lg">{icon}</Box>
-                <Text color="fg.muted">{label}</Text>
+        <Flex className="home-page__stat">
+            <Flex className="home-page__stat-label">
+                <Box className={`home-page__stat-icon home-page__tone--${tone}`}>{icon}</Box>
+                <Text className="home-page__muted">{label}</Text>
             </Flex>
 
-            <Text fontSize="1xl" fontWeight="bold" color={color}>
+            <Text className={`home-page__stat-value home-page__tone--${tone}`}>
                 {value}
             </Text>
         </Flex>
@@ -46,28 +47,24 @@ function HomePage() {
 
     if (loading) {
         return (
-            <Center py={20}>
+            <Center className="home-page__loading">
                 <Spinner size='lg' />
             </Center>
         );
     };
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="home-page">
             <Header />
 
-            <Grid templateColumns={{ base: "1fr", md: "1fr 2fr" }} gap="6" mt={8}>
+            <Grid className="home-page__top">
                 {stats && (
                     <Card.Root as="section">
-                        <Card.Header borderBottomWidth="1px" py="4">
-                            <Flex justify="space-between" align="center">
-                                <Flex align="center" gap="2">
-                                    <Box color="brand.400"><LuChartNoAxesColumn /></Box>
-                                    <Heading
-                                        size="sm"
-                                        textTransform="uppercase"
-                                        letterSpacing="wider"
-                                    >
+                        <Card.Header className="home-page__card-header">
+                            <Flex className="home-page__card-header-row">
+                                <Flex className="home-page__card-title-row">
+                                    <Box className="home-page__brand-icon"><LuChartNoAxesColumn /></Box>
+                                    <Heading size="sm" className="home-page__card-title">
                                         Live statistics
                                     </Heading>
                                 </Flex>
@@ -75,22 +72,22 @@ function HomePage() {
                         </Card.Header>
 
                         <Card.Body>
-                            <Stack gap="5">
+                            <Stack className="home-page__stats">
                                 <StatRow
                                     icon={<LuUsers />}
-                                    color="blue.400"
+                                    tone="blue"
                                     label="Users"
                                     value={stats.totalUsers}
                                 />
                                 <StatRow
                                     icon={<LuNewspaper />}
-                                    color="green.400"
+                                    tone="green"
                                     label="Posts"
                                     value={stats.totalPosts}
                                 />
                                 <StatRow
                                     icon={<LuMessageSquare />}
-                                    color="purple.400"
+                                    tone="purple"
                                     label="Comments"
                                     value={stats.totalComments}
                                 />
@@ -101,26 +98,26 @@ function HomePage() {
 
                 <Card.Root as="section">
                     <Card.Body>
-                        <Text color="fg.muted">LearnCrypto is a community for discussing cryptocurrency news, trading strategies, and blockchain technology.</Text>
+                        <Text className="home-page__muted">LearnCrypto is a community for discussing cryptocurrency news, trading strategies, and blockchain technology.</Text>
                     </Card.Body>
                 </Card.Root>
             </Grid>
 
             <CryptoTicker />
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap="8" mt={8}>
+            <SimpleGrid className="home-page__lists">
                 <Card.Root as="section">
                     <Card.Header>
                         <Heading size="lg">Recent Posts</Heading>
                     </Card.Header>
                     <Card.Body>
-                        <Stack gap={4}>
+                        <Stack className="home-page__list">
                             {posts.map((post) => (
                                 <Box key={post.id}>
                                     <Heading size="md" asChild>
                                     <RouterLink to={`/posts/${post.id}`}>{post.title}</RouterLink>
                                     </Heading>
-                                    <Text color="fg.muted"> by {' '}
+                                    <Text className="home-page__muted"> by {' '}
                                     <Link asChild>
                                     <RouterLink to={`/users/${post.author_id}`}>{post.author}</RouterLink>
                                     </Link>
@@ -136,13 +133,13 @@ function HomePage() {
                         <Heading size="lg">Most commented posts</Heading>
                     </Card.Header>
                     <Card.Body>
-                        <Stack gap={4}>
+                        <Stack className="home-page__list">
                             {comments.map((comment) => (
                                 <Box key={comment.id}>
                                     <Heading size="md" asChild>
                                     <RouterLink to={`/posts/${comment.id}`}>{comment.title}</RouterLink>
                                     </Heading>
-                                    <Text color="fg.muted"> by {' '}
+                                    <Text className="home-page__muted"> by {' '}
                                         <Link asChild>
                                         <RouterLink to={`/users/${comment.author_id}`}>{comment.author}</RouterLink>
                                         </Link>

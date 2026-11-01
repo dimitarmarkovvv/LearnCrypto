@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
 import { Button, Card, Container, Field, Heading, Input, Link, Stack } from '@chakra-ui/react';
-import { loginUser } from '../services/auth';
-import { toaster } from '../components/ui/toast-store.js';
-import { Header } from '../components/ui/Header.jsx';
-import PasswordInput from '../components/ui/PasswordInput.jsx';
+import { loginUser } from '../../services/auth.js';
+import { toaster } from '../../components/ui/toast-store.js';
+import { Header } from '../../components/ui/Header.jsx';
+import PasswordInput from '../../components/ui/PasswordInput.jsx';
+import './LoginPage.css';
 
 export function LoginPage() {
     const [email, setEmail] = useState('')
@@ -34,15 +35,15 @@ export function LoginPage() {
 
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="login-page">
             <Header />
 
-            <Card.Root maxW="sm" mx="auto" mt={10}>
+            <Card.Root className="login-page__card">
                 <Card.Body>
-                    <Heading size="lg" mb={6}>Login</Heading>
+                    <Heading size="lg" className="login-page__heading">Login</Heading>
 
                 <form onSubmit={handleSubmit}>
-                    <Stack gap={4}>
+                    <Stack className="login-page__form">
                         <Field.Root required>
                             <Field.Label>Email</Field.Label>
                             <Input
@@ -62,7 +63,7 @@ export function LoginPage() {
                             />
                         </Field.Root>
 
-                        <Link asChild fontSize="sm" alignSelf="flex-end">
+                        <Link asChild className="login-page__forgot">
                             <RouterLink to="/forgot-password">
                                 Forgot password?
                             </RouterLink>

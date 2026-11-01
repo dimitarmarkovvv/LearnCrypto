@@ -1,0 +1,67 @@
+.posts-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.posts-page__header {
+    justify-content: space-between;
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.posts-page__filters {
+    gap: var(--chakra-spacing-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.posts-page__search {
+    max-width: var(--chakra-sizes-sm);
+}
+
+.posts-page__select {
+    max-width: 200px;
+}
+
+.posts-page__loading {
+    padding-block: var(--chakra-spacing-10);
+}
+
+.posts-page__list {
+    gap: var(--chakra-spacing-6);
+}
+
+.posts-page__post {
+    border-width: 1px;
+    border-radius: var(--chakra-radii-md);
+    padding: var(--chakra-spacing-4);
+}
+
+.posts-page__content {
+    margin-top: var(--chakra-spacing-2);
+}
+
+.posts-page__meta {
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+    margin-top: var(--chakra-spacing-2);
+}
+
+.posts-page__avatar {
+    border-radius: var(--chakra-radii-full);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.posts-page__byline {
+    color: var(--chakra-colors-fg-muted);
+}
+
+.posts-page__comment-count {
+    margin-top: var(--chakra-spacing-1);
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.posts-page__actions {
+    margin-top: var(--chakra-spacing-4);
+}

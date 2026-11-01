@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, Container, Heading, HStack, Input, Spinner, Stack, Text } from '@chakra-ui/react';
-import { toaster } from '../components/ui/toast-store.js';
-import { searchUsers, getAvatarUrl } from '../services/profiles.js';
+import { toaster } from '../../components/ui/toast-store.js';
+import { searchUsers, getAvatarUrl } from '../../services/profiles.js';
 import { useNavigate } from 'react-router-dom';
-import { Header } from '../components/ui/Header.jsx';
+import { Header } from '../../components/ui/Header.jsx';
+import './UserSearchPage.css';
 
 function UserSearchPage() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -34,16 +35,16 @@ function UserSearchPage() {
 
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="user-search-page">
             <Header />
 
-            <Heading mb={6}>Search Users</Heading>
+            <Heading className="user-search-page__heading">Search Users</Heading>
 
             <Input
                 placeholder="Search by username or name..."
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                mb={6}
+                className="user-search-page__input"
             />
 
             {!searchTerm.trim() ? (
@@ -51,28 +52,21 @@ function UserSearchPage() {
             ) : loading ? (
                 <Spinner />
             ) : (
-                <Stack gap={4}>
+                <Stack className="user-search-page__results">
                     {results.map((foundUser) => (
                         <HStack
                             key={foundUser.id}
-                            borderWidth="1px"
-                            borderRadius="md" p={3}
-                            cursor="pointer"
-                            _hover={{
-                                bg: 'bg.muted'
-                            }}
+                            className="user-search-page__result"
                             onClick={() => navigate(`/users/${foundUser.id}`)}
                         >
                             {foundUser.avatar_url && (
-                                <img src={getAvatarUrl(foundUser.avatar_url)} alt="avatar" width={40} height={40} style={{ borderRadius: '50%' }} />
+                                <img src={getAvatarUrl(foundUser.avatar_url)} alt="avatar" width={40} height={40} className="user-search-page__avatar" />
                             )}
                             <Box>
-                                <Text
-                                    fontWeight="bold"
-                                >
+                                <Text className="user-search-page__username">
                                     {foundUser.username}
                                 </Text>
-                                <Text fontSize="sm" color="fg.muted">
+                                <Text className="user-search-page__name">
                                     {foundUser.first_name} {foundUser.last_name}
                                 </Text>
                             </Box>

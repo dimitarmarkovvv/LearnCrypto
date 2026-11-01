@@ -1,0 +1,78 @@
+.charts-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.charts-page__toolbar {
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--chakra-spacing-4);
+    margin-top: var(--chakra-spacing-8);
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.charts-page__toolbar-start {
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+}
+
+.charts-page__range {
+    max-width: 180px;
+}
+
+.charts-page__loading {
+    padding-block: var(--chakra-spacing-20);
+}
+
+.charts-page__categories {
+    gap: var(--chakra-spacing-10);
+}
+
+.charts-page__category-title {
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letter-spacings-wider);
+    color: var(--chakra-colors-fg-muted);
+    margin-bottom: var(--chakra-spacing-4);
+}
+
+.charts-page__grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: var(--chakra-spacing-6);
+}
+
+.charts-page__coin-header {
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--chakra-spacing-4);
+}
+
+.charts-page__coin-name {
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+}
+
+.charts-page__coin-subtitle {
+    font-size: var(--chakra-font-sizes-sm);
+    color: var(--chakra-colors-fg-muted);
+}
+
+.charts-page__coin-price {
+    text-align: right;
+}
+
+.charts-page__coin-price-value {
+    font-size: var(--chakra-font-sizes-xl);
+    font-weight: var(--chakra-font-weights-bold);
+}
+
+@media (min-width: 48rem) {
+    .charts-page__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 64rem) {
+    .charts-page__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}

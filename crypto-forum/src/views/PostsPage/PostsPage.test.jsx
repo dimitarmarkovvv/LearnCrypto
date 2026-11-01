@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import PostsPage from './PostsPage';
-import { getPosts } from '../services/posts';
-import { useAuth } from '../hooks/useAuth';
+import { getPosts } from '../../services/posts';
+import { useAuth } from '../../hooks/useAuth';
 
-vi.mock('../services/posts');
-vi.mock('../hooks/useAuth');
-vi.mock('../components/ui/toast-store.js', () => ({
+vi.mock('../../services/posts');
+vi.mock('../../hooks/useAuth');
+vi.mock('../../components/ui/toast-store.js', () => ({
     toaster: { create: vi.fn() },
 }));
 

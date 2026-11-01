@@ -1,0 +1,40 @@
+.user-search-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.user-search-page__heading {
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.user-search-page__input {
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.user-search-page__results {
+    gap: var(--chakra-spacing-4);
+}
+
+.user-search-page__result {
+    border-width: 1px;
+    border-radius: var(--chakra-radii-md);
+    padding: var(--chakra-spacing-3);
+    cursor: pointer;
+}
+
+.user-search-page__result:hover {
+    background: var(--chakra-colors-bg-muted);
+}
+
+.user-search-page__avatar {
+    border-radius: 50%;
+}
+
+.user-search-page__username {
+    font-weight: var(--chakra-font-weights-bold);
+}
+
+.user-search-page__name {
+    font-size: var(--chakra-font-sizes-sm);
+    color: var(--chakra-colors-fg-muted);
+}

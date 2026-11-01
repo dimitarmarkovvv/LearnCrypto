@@ -1,0 +1,18 @@
+.register-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.register-page__card {
+    max-width: var(--chakra-sizes-sm);
+    margin-inline: auto;
+    margin-top: var(--chakra-spacing-10);
+}
+
+.register-page__heading {
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.register-page__form {
+    gap: var(--chakra-spacing-4);
+}

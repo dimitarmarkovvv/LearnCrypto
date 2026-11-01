@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getPostById, updatePost } from "../services/posts";
+import { getPostById, updatePost } from "../../services/posts.js";
 import { useEffect, useState } from "react";
 import { Button, Center, Container, Field, Heading, Input, Spinner, Stack, Textarea, Box, Text } from '@chakra-ui/react';
-import { toaster } from '../components/ui/toast-store.js';
-import { useAuth } from "../hooks/useAuth.js";
-import { canModerate } from "../utils/roles.js";
-import { Header } from '../components/ui/Header.jsx';
+import { toaster } from '../../components/ui/toast-store.js';
+import { useAuth } from "../../hooks/useAuth.js";
+import { canModerate } from "../../utils/roles.js";
+import { Header } from '../../components/ui/Header.jsx';
+import './EditPostPage.css';
 
 function EditPostPage() {
     const navigate = useNavigate();
@@ -85,7 +86,7 @@ function EditPostPage() {
 
     if (pageLoading) {
         return (
-            <Center py={20}>
+            <Center className="edit-post-page__loading">
                 <Spinner size="lg" />
             </Center>
         );
@@ -93,24 +94,19 @@ function EditPostPage() {
 
     if (profile?.is_blocked) {
         return (
-            <Container maxW="2xl" py={10}>
-                <Box
-                    p={4}
-                    borderWidth="1px"
-                    borderRadius="md"
-                    bg="bg.subtle"
-                >
-                    <Text fontWeight="medium">
+            <Container className="edit-post-page edit-post-page--narrow">
+                <Box className="edit-post-page__notice">
+                    <Text className="edit-post-page__notice-title">
                         Editing disabled
                     </Text>
 
-                    <Text mt={1} color="fg.muted">
+                    <Text className="edit-post-page__notice-text">
                         You cannot edit posts while your account is blocked.
                     </Text>
                 </Box>
 
                 <Button
-                    mt={4}
+                    className="edit-post-page__back"
                     onClick={() => navigate('/posts')}
                 >
                     Back to Posts
@@ -120,13 +116,13 @@ function EditPostPage() {
     }
 
     return (
-        <Container maxW="4xl" py={10}>
+        <Container className="edit-post-page">
             <Header />
 
-            <Heading mt={8} mb={6}>Edit Post</Heading>
+            <Heading className="edit-post-page__heading">Edit Post</Heading>
 
             <form onSubmit={handleSubmit}>
-                <Stack gap={4}>
+                <Stack className="edit-post-page__form">
                     <Field.Root required>
                         <Field.Label>Title</Field.Label>
                         <Input
@@ -150,12 +146,12 @@ function EditPostPage() {
                             minLength={32}
                             maxLength={8192}
                             rows={14}
-                            resize="vertical"
+                            className="edit-post-page__content"
                             required
                         />
                     </Field.Root>
 
-                    <Stack direction="row" gap={3}>
+                    <Stack className="edit-post-page__actions">
                         <Button type="submit" loading={loading} loadingText="Saving...">
                             Save changes
                         </Button>

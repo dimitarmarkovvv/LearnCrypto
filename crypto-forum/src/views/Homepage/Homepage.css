@@ -1,0 +1,96 @@
+.home-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.home-page__loading {
+    padding-block: var(--chakra-spacing-20);
+}
+
+.home-page__top {
+    grid-template-columns: 1fr;
+    gap: var(--chakra-spacing-6);
+    margin-top: var(--chakra-spacing-8);
+}
+
+.home-page__card-header {
+    border-bottom-width: 1px;
+    padding-block: var(--chakra-spacing-4);
+}
+
+.home-page__card-header-row {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-page__card-title-row {
+    align-items: center;
+    gap: var(--chakra-spacing-2);
+}
+
+.home-page__brand-icon {
+    color: var(--chakra-colors-brand-400);
+}
+
+.home-page__card-title {
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letter-spacings-wider);
+}
+
+.home-page__stats {
+    gap: var(--chakra-spacing-5);
+}
+
+.home-page__stat {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-page__stat-label {
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+}
+
+.home-page__stat-icon {
+    font-size: var(--chakra-font-sizes-lg);
+}
+
+.home-page__stat-value {
+    font-weight: var(--chakra-font-weights-bold);
+}
+
+.home-page__tone--blue {
+    color: var(--chakra-colors-blue-400);
+}
+
+.home-page__tone--green {
+    color: var(--chakra-colors-green-400);
+}
+
+.home-page__tone--purple {
+    color: var(--chakra-colors-purple-400);
+}
+
+.home-page__muted {
+    color: var(--chakra-colors-fg-muted);
+}
+
+.home-page__lists {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: var(--chakra-spacing-8);
+    margin-top: var(--chakra-spacing-8);
+}
+
+.home-page__list {
+    gap: var(--chakra-spacing-4);
+}
+
+@media (min-width: 48rem) {
+    .home-page__top {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .home-page__lists {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

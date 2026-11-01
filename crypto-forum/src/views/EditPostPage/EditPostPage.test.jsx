@@ -3,16 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import EditPostPage from './EditPostPage';
-import { getPostById, updatePost } from '../services/posts';
-import { useAuth } from '../hooks/useAuth.js';
-import { toaster } from '../components/ui/toast-store.js';
+import EditPostPage from './EditPostPage.jsx';
+import { getPostById, updatePost } from '../../services/posts.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { toaster } from '../../components/ui/toast-store.js';
 
 const navigate = vi.fn();
 
-vi.mock('../services/posts');
-vi.mock('../hooks/useAuth.js');
-vi.mock('../components/ui/toast-store.js', () => ({
+vi.mock('../../services/posts');
+vi.mock('../../hooks/useAuth.js');
+vi.mock('../../components/ui/toast-store.js', () => ({
     toaster: { create: vi.fn() },
 }));
 vi.mock('react-router-dom', async (importOriginal) => {

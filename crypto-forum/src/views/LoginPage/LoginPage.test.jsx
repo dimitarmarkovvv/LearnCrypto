@@ -4,11 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { LoginPage } from './LoginPage';
-import { loginUser } from '../services/auth';
-import { toaster } from '../components/ui/toast-store.js';
+import { loginUser } from '../../services/auth.js';
+import { toaster } from '../../components/ui/toast-store.js';
 
-vi.mock('../services/auth');
-vi.mock('../components/ui/toast-store.js');
+vi.mock('../../services/auth');
+vi.mock('../../components/ui/toast-store.js');
 
 const mockNavigate = vi.fn();
 

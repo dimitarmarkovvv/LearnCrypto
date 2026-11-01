@@ -21,15 +21,16 @@ import {
     getAvatarUrl,
     promoteUser,
     setUserBlocked,
-} from '../services/profiles.js';
-import { useAuth } from '../hooks/useAuth.js';
-import { ROLES } from '../utils/roles.js';
+} from '../../services/profiles.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { ROLES } from '../../utils/roles.js';
 import { LuChevronDown } from 'react-icons/lu';
-import { toaster } from '../components/ui/toast-store.js';
-import BlockUserDialog from '../components/ui/admin/BlockUserDialog.jsx';
-import RoleChangeDialog from '../components/ui/admin/RoleChangeDialog.jsx';
-import PostManagement from '../components/ui/admin/PostManagement.jsx';
-import { Header } from '../components/ui/Header.jsx';
+import { toaster } from '../../components/ui/toast-store.js';
+import BlockUserDialog from '../../components/ui/admin/BlockUserDialog.jsx';
+import RoleChangeDialog from '../../components/ui/admin/RoleChangeDialog.jsx';
+import PostManagement from '../../components/ui/admin/PostManagement.jsx';
+import { Header } from '../../components/ui/Header.jsx';
+import './AdminDashboardPage.css';
 
 
 const ROLE_LABELS = {
@@ -147,16 +148,16 @@ function AdminDashboardPage() {
     };
 
     return (
-        <Container maxW="7xl" py={10}>
+        <Container className="admin-page">
             <Header />
 
-            <Stack gap={10}>
+            <Stack className="admin-page__sections">
                 <Box>
                     <Heading size="2xl">
                         Admin Dashboard
                     </Heading>
 
-                    <Text mt={2} color="fg.muted">
+                    <Text className="admin-page__subtitle">
                         Manage users, posts and forum administration.
                     </Text>
                 </Box>
@@ -168,22 +169,17 @@ function AdminDashboardPage() {
                         onChange={(event) =>
                             setSearchTerm(event.target.value)
                         }
-                        maxW="lg"
-                        mb={5}
+                        className="admin-page__search"
                     />
 
                     {loadingUsers ? (
                         <Spinner />
                     ) : users.length === 0 ? (
-                        <Text color="fg.muted">
+                        <Text className="admin-page__muted">
                             No users found.
                         </Text>
                     ) : (
-                        <Box
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            overflowX="auto"
-                        >
+                        <Box className="admin-page__table-wrapper">
                             <Table.Root>
                                 <Table.Header>
                                     <Table.Row>
@@ -212,15 +208,9 @@ function AdminDashboardPage() {
                                     {users.map((foundUser) => (
                                         <Table.Row key={foundUser.id}>
                                             <Table.Cell>
-                                                <Box
-                                                    display="flex"
-                                                    alignItems="center"
-                                                    gap={3}
-                                                >
+                                                <Box className="admin-page__user">
                                                     <Avatar.Root
-                                                        w="42px"
-                                                        h="42px"
-                                                        cursor="pointer"
+                                                        className="admin-page__avatar"
                                                         onClick={() =>
                                                             navigate(
                                                                 `/users/${foundUser.id}`
@@ -242,12 +232,7 @@ function AdminDashboardPage() {
 
                                                     <Box>
                                                         <Text
-                                                            fontWeight="bold"
-                                                            cursor="pointer"
-                                                            _hover={{
-                                                                textDecoration:
-                                                                    'underline',
-                                                            }}
+                                                            className="admin-page__username"
                                                             onClick={() =>
                                                                 navigate(
                                                                     `/users/${foundUser.id}`
@@ -257,10 +242,7 @@ function AdminDashboardPage() {
                                                             {foundUser.username}
                                                         </Text>
 
-                                                        <Text
-                                                            fontSize="sm"
-                                                            color="fg.muted"
-                                                        >
+                                                        <Text className="admin-page__name">
                                                             {foundUser.first_name}{' '}
                                                             {foundUser.last_name}
                                                         </Text>
@@ -303,7 +285,7 @@ function AdminDashboardPage() {
                                                         You
                                                     </Badge>
                                                 ) : (
-                                                    <HStack gap={8}>
+                                                    <HStack className="admin-page__actions">
                                                         <Menu.Root
                                                             onSelect={(details) =>
                                                                 setRoleChange({

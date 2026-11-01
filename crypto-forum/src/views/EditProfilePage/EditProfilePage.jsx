@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Field, Heading, Input, NativeSelect, Stack, Textarea } from '@chakra-ui/react';
-import { toaster } from '../components/ui/toast-store.js';
-import { useAuth } from '../hooks/useAuth.js';
-import { updateProfile, uploadAvatar } from '../services/profiles.js';
+import { toaster } from '../../components/ui/toast-store.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { updateProfile, uploadAvatar } from '../../services/profiles.js';
+import './EditProfilePage.css';
 
 function EditProfilePage() {
     const { user, profile, refreshProfile } = useAuth();
@@ -46,11 +47,11 @@ function EditProfilePage() {
     };
 
     return (
-        <Container maxW="2xl" py={10}>
-            <Heading mb={6}>Edit Profile</Heading>
+        <Container className="edit-profile-page">
+            <Heading className="edit-profile-page__heading">Edit Profile</Heading>
 
             <form onSubmit={handleSubmit}>
-                <Stack gap={4}>
+                <Stack className="edit-profile-page__form">
                     <Field.Root>
                         <Field.Label>First Name</Field.Label>
                         <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -88,7 +89,7 @@ function EditProfilePage() {
                         <input type="file" accept="image/*" onChange={(e) => setAvatarFile(e.target.files[0])} />
                     </Field.Root>
 
-                    <Stack direction="row" gap={3}>
+                    <Stack className="edit-profile-page__actions">
                         <Button type="submit" loading={loading} loadingText="Saving...">
                             Save changes
                         </Button>

@@ -1,0 +1,53 @@
+.create-post-page {
+    max-width: var(--chakra-sizes-4xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.create-post-page__alert,
+.create-post-page__card {
+    margin-top: var(--chakra-spacing-8);
+}
+
+.create-post-page__back {
+    margin-top: var(--chakra-spacing-4);
+}
+
+.create-post-page__card-header {
+    border-bottom-width: 1px;
+    padding-block: var(--chakra-spacing-4);
+}
+
+.create-post-page__title-row {
+    align-items: center;
+    gap: var(--chakra-spacing-2);
+}
+
+.create-post-page__icon {
+    color: var(--chakra-colors-brand-400);
+}
+
+.create-post-page__title {
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letter-spacings-wider);
+}
+
+.create-post-page__form {
+    gap: var(--chakra-spacing-6);
+}
+
+.create-post-page__hint {
+    color: var(--chakra-colors-fg-muted);
+}
+
+.create-post-page__hint--error {
+    color: var(--chakra-colors-red-500);
+}
+
+.create-post-page__content {
+    resize: vertical;
+}
+
+.create-post-page__actions {
+    flex-direction: row;
+    gap: var(--chakra-spacing-3);
+}

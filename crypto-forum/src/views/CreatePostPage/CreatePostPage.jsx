@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth.js";
 import { useState } from 'react';
-import { createPost } from '../services/posts';
+import { createPost } from '../../services/posts.js';
 import { Alert, Box, Button, Card, Container, Field, Flex, Heading, Input, Stack, Text, Textarea } from '@chakra-ui/react';
-import { toaster } from '../components/ui/toast-store.js';
-import { Header } from '../components/ui/Header.jsx';
+import { toaster } from '../../components/ui/toast-store.js';
+import { Header } from '../../components/ui/Header.jsx';
 import { LuPenLine } from 'react-icons/lu';
+import './CreatePostPage.css';
 
 function CreatePostPage() {
     const { user, profile } = useAuth();
@@ -18,10 +19,10 @@ function CreatePostPage() {
 
     if (profile?.is_blocked) {
         return (
-            <Container maxW="4xl" py={10}>
+            <Container className="create-post-page">
                 <Header />
 
-                <Alert.Root mt={8} status="error">
+                <Alert.Root status="error" className="create-post-page__alert">
                     <Alert.Indicator />
 
                     <Alert.Content>
@@ -37,7 +38,7 @@ function CreatePostPage() {
                     </Alert.Content>
                 </Alert.Root>
 
-                <Button mt={4} onClick={() => navigate('/posts')}>
+                <Button className="create-post-page__back" onClick={() => navigate('/posts')}>
                     Back to Posts
                 </Button>
             </Container>
@@ -80,15 +81,15 @@ function CreatePostPage() {
     };
 
     return (
-        <Container maxW="4xl" py={10}>
+        <Container className="create-post-page">
             <Header />
 
-            <Card.Root mt={8}>
-                <Card.Header borderBottomWidth="1px" py="4">
-                    <Flex align="center" gap={2}>
-                        <Box color="brand.400"><LuPenLine /></Box>
+            <Card.Root className="create-post-page__card">
+                <Card.Header className="create-post-page__card-header">
+                    <Flex className="create-post-page__title-row">
+                        <Box className="create-post-page__icon"><LuPenLine /></Box>
 
-                        <Heading size="sm" textTransform="uppercase" letterSpacing="wider">
+                        <Heading size="sm" className="create-post-page__title">
                             Create a post
                         </Heading>
                     </Flex>
@@ -96,7 +97,7 @@ function CreatePostPage() {
 
                 <Card.Body>
                     <form onSubmit={handleSubmit}>
-                        <Stack gap={6}>
+                        <Stack className="create-post-page__form">
                             <Field.Root required>
                                 <Field.Label>Title</Field.Label>
 
@@ -114,7 +115,7 @@ function CreatePostPage() {
                                 <Field.HelperText>
                                     <Text
                                         as="span"
-                                        color={title.length < 16 ? 'red.500' : 'fg.muted'}
+                                        className={title.length < 16 ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
                                     >
                                         {title.length < 16
                                             ? `${16 - title.length} more characters needed`
@@ -136,14 +137,14 @@ function CreatePostPage() {
                                     minLength={32}
                                     maxLength={8192}
                                     rows={14}
-                                    resize="vertical"
+                                    className="create-post-page__content"
                                     required
                                 />
 
                                 <Field.HelperText>
                                     <Text
                                         as="span"
-                                        color={content.length < 32 ? 'red.500' : 'fg.muted'}
+                                        className={content.length < 32 ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
                                     >
                                         {content.length < 32
                                             ? `${32 - content.length} more characters needed`
@@ -155,7 +156,7 @@ function CreatePostPage() {
                             </Field.Root>
 
 
-                            <Stack direction="row" gap={3}>
+                            <Stack className="create-post-page__actions">
                                 <Button type="submit" loading={loading} loadingText="Creating...">
                                     Create Post
                                 </Button>

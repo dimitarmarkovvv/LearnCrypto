@@ -1,23 +1,24 @@
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { LuPencil, LuTrash2, LuMessageSquare } from 'react-icons/lu';
 import { useParams } from "react-router-dom";
-import { deletePost, getPostById } from "../services/posts";
+import { deletePost, getPostById } from "../../services/posts.js";
 import { useEffect, useState } from "react";
 import { Avatar, Button, Card, Center, Container, Flex, Heading, IconButton, Spacer, Spinner, HStack, Text, Stack, Textarea, Box, NativeSelect, Link } from '@chakra-ui/react';
-import { toaster } from '../components/ui/toast-store.js';
-import { formatDate } from "../utils/formatDate.js";
-import { useAuth } from "../hooks/useAuth.js";
-import { canModerate } from "../utils/roles.js";
-import { Header } from '../components/ui/Header.jsx';
-import { getCommentsByPostId } from "../services/comments.js";
-import { getAvatarUrl } from "../services/profiles.js";
-import { castVote, getPostVotes, removeVote, } from "../services/votes.js";
-import { buildCommentTree } from '../utils/buildCommentTree.js';
-import Comment from '../components/ui/comments/Comment.jsx'
-import DeleteCommentDialog from '../components/ui/comments/DeleteCommentDialog.jsx';
-import DeletePostDialog from '../components/ui/DeletePostDialog.jsx';
-import { useComments } from '../hooks/useComments.js';
-import { useCommentVotes } from '../hooks/useCommentVotes.js';
+import { toaster } from '../../components/ui/toast-store.js';
+import { formatDate } from "../../utils/formatDate.js";
+import { useAuth } from "../../hooks/useAuth.js";
+import { canModerate } from "../../utils/roles.js";
+import { Header } from '../../components/ui/Header.jsx';
+import { getCommentsByPostId } from "../../services/comments.js";
+import { getAvatarUrl } from "../../services/profiles.js";
+import { castVote, getPostVotes, removeVote, } from "../../services/votes.js";
+import { buildCommentTree } from '../../utils/buildCommentTree.js';
+import Comment from '../../components/ui/comments/Comment.jsx'
+import DeleteCommentDialog from '../../components/ui/comments/DeleteCommentDialog.jsx';
+import DeletePostDialog from '../../components/ui/DeletePostDialog.jsx';
+import { useComments } from '../../hooks/useComments.js';
+import { useCommentVotes } from '../../hooks/useCommentVotes.js';
+import './PostDetailsPage.css';
 
 function PostDetailsPage() {
     const navigate = useNavigate();
@@ -136,21 +137,19 @@ function PostDetailsPage() {
     };
 
     return (
-        <Container maxW="4xl" py={10}>
+        <Container className="post-details-page">
             <Header />
 
-            <Card.Root as="article" mt={8}>
+            <Card.Root as="article" className="post-details-page__card">
                 <Card.Body>
-                    <Heading mb={3}>{post.title}</Heading>
+                    <Heading className="post-details-page__title">{post.title}</Heading>
 
-                    <Flex align="center" gap={3} mb={5}>
+                    <Flex className="post-details-page__author">
                         <Link asChild>
                             <RouterLink to={`/users/${post.author_id}`}>
                                 <Avatar.Root
                                     size="sm"
-                                    borderRadius="full"
-                                    overflow="hidden"
-                                    flexShrink={0}
+                                    className="post-details-page__avatar"
                                 >
                                     <Avatar.Fallback
                                         name={post.profiles.username}
@@ -168,9 +167,9 @@ function PostDetailsPage() {
                             </RouterLink>
                         </Link>
 
-                        <Text color="fg.muted" fontSize="sm">
+                        <Text className="post-details-page__byline">
                             by{' '}
-                            <Link asChild color="inherit">
+                            <Link asChild className="post-details-page__inherit-link">
                                 <RouterLink to={`/users/${post.author_id}`}>
                                     {post.profiles.username}
                                 </RouterLink>
@@ -180,11 +179,11 @@ function PostDetailsPage() {
                         </Text>
                     </Flex>
 
-                    <Text whiteSpace="pre-wrap">{post.content}</Text>
+                    <Text className="post-details-page__content">{post.content}</Text>
                 </Card.Body>
 
-                <Card.Footer borderTopWidth="1px" pt="4">
-                    <HStack gap={1}>
+                <Card.Footer className="post-details-page__footer">
+                    <HStack className="post-details-page__votes">
                         <IconButton
                             aria-label="Upvote"
                             size="sm"
@@ -195,7 +194,7 @@ function PostDetailsPage() {
                             ▲
                         </IconButton>
 
-                        <Text fontWeight="bold" minW="8" textAlign="center">
+                        <Text className="post-details-page__score">
                             {score}
                         </Text>
 
@@ -213,7 +212,7 @@ function PostDetailsPage() {
                     <Spacer />
 
                     {(post.author_id === user.id || isModerator) && (
-                        <HStack gap={2}>
+                        <HStack className="post-details-page__owner-actions">
                             <Button
                                 size="sm"
                                 variant="ghost"
@@ -236,22 +235,22 @@ function PostDetailsPage() {
                 </Card.Footer>
             </Card.Root>
 
-            <Card.Root as="section" mt={8}>
-                <Card.Header borderBottomWidth="1px" py="4">
-                    <Flex justify="space-between" align="center" gap="4">
-                        <Flex align="center" gap={2}>
-                            <Box color="brand.400"><LuMessageSquare /></Box>
+            <Card.Root as="section" className="post-details-page__card">
+                <Card.Header className="post-details-page__comments-header">
+                    <Flex className="post-details-page__comments-header-row">
+                        <Flex className="post-details-page__comments-title-row">
+                            <Box className="post-details-page__icon"><LuMessageSquare /></Box>
 
-                            <Heading size="sm" textTransform="uppercase" letterSpacing="wider">
+                            <Heading size="sm" className="post-details-page__section-title">
                                 Comments
                             </Heading>
 
-                            <Text color="fg.muted" fontSize="sm">
+                            <Text className="post-details-page__count">
                                 ({commentTree.length})
                             </Text>
                         </Flex>
 
-                        <NativeSelect.Root size="sm" maxW="140px">
+                        <NativeSelect.Root size="sm" className="post-details-page__sort">
                             <NativeSelect.Field
                                 value={sort}
                                 onChange={(event) => setSort(event.target.value)}
@@ -266,7 +265,7 @@ function PostDetailsPage() {
 
                 <Card.Body>
 
-            <Stack gap={4}>
+            <Stack className="post-details-page__comments">
                 {commentTree.length === 0 ? (
                     <Text>No comments yet.</Text>
                 ) : (
@@ -299,18 +298,12 @@ function PostDetailsPage() {
             </Stack>
 
             {profile?.is_blocked ? (
-                <Box
-                    mt={4}
-                    p={3}
-                    borderWidth="1px"
-                    borderRadius="md"
-                    bg="bg.subtle"
-                >
-                    <Text fontWeight="medium" fontSize="sm">
+                <Box className="post-details-page__blocked">
+                    <Text className="post-details-page__blocked-title">
                         Commenting disabled
                     </Text>
 
-                    <Text fontSize="sm" color="fg.muted" mt={1}>
+                    <Text className="post-details-page__blocked-text">
                         You cannot post comments or replies while your account is blocked.
                     </Text>
                 </Box>
@@ -322,14 +315,14 @@ function PostDetailsPage() {
                     }}
                 >
                     <Textarea
-                        mt={4}
+                        className="post-details-page__comment-input"
                         placeholder="Write a comment..."
                         value={newComments}
                         onChange={(event) => setNewComments(event.target.value)}
                         required
                     />
 
-                    <Button mt={2} type="submit">
+                    <Button type="submit" className="post-details-page__comment-submit">
                         Post Comment
                     </Button>
                 </form>

@@ -3,16 +3,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import PostDetailsPage from './PostDetailsPage';
-import { getPostById } from '../services/posts';
-import { getCommentsByPostId, createComment } from '../services/comments';
-import { getPostVotes, castVote, getCommentVotes, castCommentVote } from '../services/votes';
-import { useAuth } from '../hooks/useAuth.js';
+import PostDetailsPage from './PostDetailsPage.jsx';
+import { getPostById } from '../../services/posts.js';
+import { getCommentsByPostId, createComment } from '../../services/comments.js';
+import { getPostVotes, castVote, getCommentVotes, castCommentVote } from '../../services/votes.js';
+import { useAuth } from '../../hooks/useAuth.js';
 
-vi.mock('../services/posts');
-vi.mock('../services/comments');
-vi.mock('../services/votes');
-vi.mock('../hooks/useAuth.js');
+vi.mock('../../services/posts');
+vi.mock('../../services/comments');
+vi.mock('../../services/votes');
+vi.mock('../../hooks/useAuth.js');
 vi.mock('react-router-dom', async (importOriginal) => {
     const actual = await importOriginal();
     return {

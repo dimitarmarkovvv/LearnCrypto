@@ -1,0 +1,158 @@
+.user-profile-page {
+    max-width: var(--chakra-sizes-6xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.user-profile-page__loading {
+    padding-block: var(--chakra-spacing-10);
+}
+
+.user-profile-page__error-container {
+    padding-block: var(--chakra-spacing-10);
+}
+
+.user-profile-page__error {
+    color: var(--chakra-colors-red-500);
+}
+
+.user-profile-page__not-found {
+    min-height: 70vh;
+}
+
+.user-profile-page__not-found-stack {
+    align-items: center;
+    gap: var(--chakra-spacing-6);
+}
+
+.user-profile-page__not-found-text {
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-lg);
+}
+
+.user-profile-page__layout {
+    grid-template-columns: 1fr;
+    gap: var(--chakra-spacing-8);
+    align-items: start;
+    margin-top: var(--chakra-spacing-8);
+}
+
+.user-profile-page__summary {
+    gap: var(--chakra-spacing-5);
+    align-items: center;
+    text-align: center;
+}
+
+.user-profile-page__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--chakra-radii-full);
+    overflow: hidden;
+}
+
+.user-profile-page__names {
+    gap: var(--chakra-spacing-1);
+}
+
+.user-profile-page__muted {
+    color: var(--chakra-colors-fg-muted);
+}
+
+.user-profile-page__meta {
+    gap: var(--chakra-spacing-2);
+    width: 100%;
+    border-top-width: 1px;
+    padding-top: var(--chakra-spacing-4);
+}
+
+.user-profile-page__meta-row {
+    align-items: center;
+    gap: var(--chakra-spacing-2);
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.user-profile-page__meta-text {
+    text-transform: capitalize;
+}
+
+.user-profile-page__signature {
+    font-style: italic;
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.user-profile-page__edit {
+    width: 100%;
+}
+
+.user-profile-page__sections {
+    gap: var(--chakra-spacing-8);
+}
+
+.user-profile-page__section-header {
+    border-bottom-width: 1px;
+    padding-block: var(--chakra-spacing-4);
+}
+
+.user-profile-page__section-title-row {
+    align-items: center;
+    gap: var(--chakra-spacing-2);
+}
+
+.user-profile-page__icon {
+    color: var(--chakra-colors-brand-400);
+}
+
+.user-profile-page__section-title {
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letter-spacings-wider);
+}
+
+.user-profile-page__count {
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.user-profile-page__items {
+    gap: 0;
+}
+
+.user-profile-page__item {
+    padding-block: var(--chakra-spacing-4);
+    border-bottom-width: 1px;
+}
+
+.user-profile-page__item:first-child {
+    padding-top: 0;
+}
+
+.user-profile-page__item:last-child {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+}
+
+.user-profile-page__excerpt {
+    margin-top: var(--chakra-spacing-2);
+    color: var(--chakra-colors-fg-muted);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+}
+
+.user-profile-page__item-meta {
+    margin-top: var(--chakra-spacing-2);
+    font-size: var(--chakra-font-sizes-sm);
+    color: var(--chakra-colors-fg-muted);
+}
+
+.user-profile-page__inherit-link {
+    color: inherit;
+}
+
+@media (min-width: 48rem) {
+    .user-profile-page__layout {
+        grid-template-columns: 300px 1fr;
+    }
+}

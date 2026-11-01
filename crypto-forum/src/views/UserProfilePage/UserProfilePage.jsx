@@ -4,32 +4,33 @@ import { LuMapPin, LuUser, LuPencil, LuNewspaper, LuMessageSquare } from 'react-
 import {
     Card, Center, Container, Flex, Heading, Avatar, Spinner, Stack, Text, Box, Grid, Button, Link
 } from '@chakra-ui/react';
-import { getAvatarUrl, getUserProfileById } from '../services/profiles';
-import { getPosts } from '../services/posts.js';
-import { formatDate } from '../utils/formatDate.js';
-import { getCommentsByAuthorId } from '../services/comments.js';
-import { useAuth } from '../hooks/useAuth.js';
-import { Header } from '../components/ui/Header.jsx';
+import { getAvatarUrl, getUserProfileById } from '../../services/profiles';
+import { getPosts } from '../../services/posts.js';
+import { formatDate } from '../../utils/formatDate.js';
+import { getCommentsByAuthorId } from '../../services/comments.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { Header } from '../../components/ui/Header.jsx';
+import './UserProfilePage.css';
 
 function MetaRow({ icon, text }) {
     return (
-        <Flex align="center" gap={2} color="fg.muted" fontSize="sm">
+        <Flex className="user-profile-page__meta-row">
             <Box>{icon}</Box>
-            <Text textTransform="capitalize">{text}</Text>
+            <Text className="user-profile-page__meta-text">{text}</Text>
         </Flex>
     );
 }
 
 function SectionTitle({ icon, title, count }) {
     return (
-        <Flex align="center" gap={2}>
-            <Box color="brand.400">{icon}</Box>
+        <Flex className="user-profile-page__section-title-row">
+            <Box className="user-profile-page__icon">{icon}</Box>
 
-            <Heading size="sm" textTransform="uppercase" letterSpacing="wider">
+            <Heading size="sm" className="user-profile-page__section-title">
                 {title}
             </Heading>
 
-            <Text color="fg.muted" fontSize="sm">({count})</Text>
+            <Text className="user-profile-page__count">({count})</Text>
         </Flex>
     );
 }
@@ -79,7 +80,7 @@ function UserProfilePage() {
 
     if (loading) {
         return (
-            <Center py={10}>
+            <Center className="user-profile-page__loading">
                 <Spinner size="lg" />
             </Center>
         );
@@ -87,8 +88,8 @@ function UserProfilePage() {
 
     if (error) {
         return (
-            <Container maxW="2x1" py={10}>
-                <Text color="red.500">
+            <Container className="user-profile-page__error-container">
+                <Text className="user-profile-page__error">
                     Failed to load profile: {error}
                 </Text>
             </Container>
@@ -97,13 +98,13 @@ function UserProfilePage() {
 
     if (!userProfile) {
         return (
-            <Center minH="70vh">
-                <Stack align="center" gap={6}>
+            <Center className="user-profile-page__not-found">
+                <Stack className="user-profile-page__not-found-stack">
                     <Heading size="2xl">
                         User not found.
                     </Heading>
 
-                    <Text color="fg.muted" fontSize="lg">
+                    <Text className="user-profile-page__not-found-text">
                         The user you are looking for does not exist.
                     </Text> 
 
@@ -119,19 +120,14 @@ function UserProfilePage() {
     }
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="user-profile-page">
             <Header />
 
-            <Grid
-                templateColumns={{ base: '1fr', md: '300px 1fr' }}
-                gap={8}
-                alignItems="start"
-                mt={8}
-            >
+            <Grid className="user-profile-page__layout">
                 <Card.Root as="aside">
                     <Card.Body>
-                        <Stack gap={5} align="center" textAlign="center">
-                            <Avatar.Root w="120px" h="120px" borderRadius="full" overflow="hidden">
+                        <Stack className="user-profile-page__summary">
+                            <Avatar.Root className="user-profile-page__avatar">
                                 <Avatar.Fallback
                                     name={`${userProfile.first_name} ${userProfile.last_name}`}
                                 />
@@ -144,16 +140,16 @@ function UserProfilePage() {
                                 )}
                             </Avatar.Root>
 
-                            <Stack gap={1}>
+                            <Stack className="user-profile-page__names">
                                 <Heading size="lg">{userProfile.username}</Heading>
 
-                                <Text color="fg.muted">
+                                <Text className="user-profile-page__muted">
                                     {userProfile.first_name} {userProfile.last_name}
                                 </Text>
                             </Stack>
 
                             {(userProfile.location || userProfile.gender) && (
-                                <Stack gap={2} width="full" borderTopWidth="1px" pt={4}>
+                                <Stack className="user-profile-page__meta">
                                     {userProfile.location && (
                                         <MetaRow icon={<LuMapPin />} text={userProfile.location} />
                                     )}
@@ -165,7 +161,7 @@ function UserProfilePage() {
                             )}
 
                             {userProfile.signature && (
-                                <Text fontStyle="italic" color="fg.muted" fontSize="sm">
+                                <Text className="user-profile-page__signature">
                                     &ldquo;{userProfile.signature}&rdquo;
                                 </Text>
                             )}
@@ -173,7 +169,7 @@ function UserProfilePage() {
                             {user.id === userProfile.id && (
                                 <Button
                                     size="sm"
-                                    width="full"
+                                    className="user-profile-page__edit"
                                     onClick={() => navigate('/profile/edit')}
                                 >
                                     <LuPencil /> Edit Profile
@@ -183,9 +179,9 @@ function UserProfilePage() {
                     </Card.Body>
                 </Card.Root>
 
-                <Stack gap={8}>
+                <Stack className="user-profile-page__sections">
                     <Card.Root as="section">
-                        <Card.Header borderBottomWidth="1px" py="4">
+                        <Card.Header className="user-profile-page__section-header">
                             <SectionTitle
                                 icon={<LuNewspaper />}
                                 title="Posts"
@@ -195,18 +191,15 @@ function UserProfilePage() {
 
                         <Card.Body>
                             {posts.length === 0 ? (
-                                <Text color="fg.muted">
+                                <Text className="user-profile-page__muted">
                                     This user has not created any posts yet.
                                 </Text>
                             ) : (
-                                <Stack gap={0}>
+                                <Stack className="user-profile-page__items">
                                     {posts.map((post) => (
                                         <Box
                                             key={post.id}
-                                            py={4}
-                                            borderBottomWidth="1px"
-                                            _last={{ borderBottomWidth: 0, pb: 0 }}
-                                            _first={{ pt: 0 }}
+                                            className="user-profile-page__item"
                                         >
                                             <Heading size="sm" asChild>
                                                 <RouterLink to={`/posts/${post.id}`}>
@@ -214,11 +207,11 @@ function UserProfilePage() {
                                                 </RouterLink>
                                             </Heading>
 
-                                            <Text mt={2} color="fg.muted" lineClamp={2}>
+                                            <Text className="user-profile-page__excerpt">
                                                 {post.content}
                                             </Text>
 
-                                            <Text mt={2} fontSize="sm" color="fg.muted">
+                                            <Text className="user-profile-page__item-meta">
                                                 {formatDate(post.created_at)}
                                             </Text>
                                         </Box>
@@ -229,7 +222,7 @@ function UserProfilePage() {
                     </Card.Root>
 
                     <Card.Root as="section">
-                        <Card.Header borderBottomWidth="1px" py="4">
+                        <Card.Header className="user-profile-page__section-header">
                             <SectionTitle
                                 icon={<LuMessageSquare />}
                                 title="Comments"
@@ -239,24 +232,21 @@ function UserProfilePage() {
 
                         <Card.Body>
                             {comments.length === 0 ? (
-                                <Text color="fg.muted">
+                                <Text className="user-profile-page__muted">
                                     This user has not created any comments yet.
                                 </Text>
                             ) : (
-                                <Stack gap={0}>
+                                <Stack className="user-profile-page__items">
                                     {comments.map((comment) => (
                                         <Box
                                             key={comment.id}
-                                            py={4}
-                                            borderBottomWidth="1px"
-                                            _last={{ borderBottomWidth: 0, pb: 0 }}
-                                            _first={{ pt: 0 }}
+                                            className="user-profile-page__item"
                                         >
                                             <Text>{comment.content}</Text>
 
-                                            <Text mt={2} fontSize="sm" color="fg.muted">
+                                            <Text className="user-profile-page__item-meta">
                                                 on{' '}
-                                                <Link asChild color="inherit">
+                                                <Link asChild className="user-profile-page__inherit-link">
                                                     <RouterLink to={`/posts/${comment.posts.id}`}>
                                                         {comment.posts.title}
                                                     </RouterLink>

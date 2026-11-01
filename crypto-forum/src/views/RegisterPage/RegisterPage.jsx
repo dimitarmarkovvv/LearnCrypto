@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Container, Field, Heading, Input, Stack } from '@chakra-ui/react';
-import { registerUser } from '../services/auth';
-import { toaster } from '../components/ui/toast-store.js';
-import { Header } from '../components/ui/Header.jsx';
-import PasswordInput from '../components/ui/PasswordInput.jsx';
+import { registerUser } from '../../services/auth.js';
+import { toaster } from '../../components/ui/toast-store.js';
+import { Header } from '../../components/ui/Header.jsx';
+import PasswordInput from '../../components/ui/PasswordInput.jsx';
+import './RegisterPage.css';
 
 export function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -33,15 +34,15 @@ export function RegisterPage() {
     };
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="register-page">
             <Header />
 
-            <Card.Root maxW="sm" mx="auto" mt={10}>
+            <Card.Root className="register-page__card">
                 <Card.Body>
-                    <Heading size="lg" mb={6}>Register</Heading>
+                    <Heading size="lg" className="register-page__heading">Register</Heading>
 
                 <form onSubmit={handleSubmit}>
-                    <Stack gap={4}>
+                    <Stack className="register-page__form">
                         <Field.Root required>
                             <Field.Label>Username</Field.Label>
                             <Input

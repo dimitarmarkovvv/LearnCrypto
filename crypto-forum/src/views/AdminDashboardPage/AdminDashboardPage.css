@@ -1,0 +1,58 @@
+.admin-page {
+    max-width: var(--chakra-sizes-7xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.admin-page__sections {
+    gap: var(--chakra-spacing-10);
+}
+
+.admin-page__subtitle {
+    margin-top: var(--chakra-spacing-2);
+    color: var(--chakra-colors-fg-muted);
+}
+
+.admin-page__search {
+    max-width: var(--chakra-sizes-lg);
+    margin-bottom: var(--chakra-spacing-5);
+}
+
+.admin-page__muted {
+    color: var(--chakra-colors-fg-muted);
+}
+
+.admin-page__table-wrapper {
+    border-width: 1px;
+    border-radius: var(--chakra-radii-lg);
+    overflow-x: auto;
+}
+
+.admin-page__user {
+    display: flex;
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+}
+
+.admin-page__avatar {
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+}
+
+.admin-page__username {
+    font-weight: var(--chakra-font-weights-bold);
+    cursor: pointer;
+}
+
+.admin-page__username:hover {
+    text-decoration: underline;
+}
+
+.admin-page__name {
+    font-size: var(--chakra-font-sizes-sm);
+    color: var(--chakra-colors-fg-muted);
+}
+
+.admin-page__actions {
+    gap: var(--chakra-spacing-8);
+}

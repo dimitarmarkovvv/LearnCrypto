@@ -1,0 +1,121 @@
+.post-details-page {
+    max-width: var(--chakra-sizes-4xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.post-details-page__card {
+    margin-top: var(--chakra-spacing-8);
+}
+
+.post-details-page__title {
+    margin-bottom: var(--chakra-spacing-3);
+}
+
+.post-details-page__author {
+    align-items: center;
+    gap: var(--chakra-spacing-3);
+    margin-bottom: var(--chakra-spacing-5);
+}
+
+.post-details-page__avatar {
+    border-radius: var(--chakra-radii-full);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.post-details-page__byline {
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.post-details-page__inherit-link {
+    color: inherit;
+}
+
+.post-details-page__content {
+    white-space: pre-wrap;
+}
+
+.post-details-page__footer {
+    border-top-width: 1px;
+    padding-top: var(--chakra-spacing-4);
+}
+
+.post-details-page__votes {
+    gap: var(--chakra-spacing-1);
+}
+
+.post-details-page__score {
+    font-weight: var(--chakra-font-weights-bold);
+    min-width: var(--chakra-sizes-8);
+    text-align: center;
+}
+
+.post-details-page__owner-actions {
+    gap: var(--chakra-spacing-2);
+}
+
+.post-details-page__comments-header {
+    border-bottom-width: 1px;
+    padding-block: var(--chakra-spacing-4);
+}
+
+.post-details-page__comments-header-row {
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--chakra-spacing-4);
+}
+
+.post-details-page__comments-title-row {
+    align-items: center;
+    gap: var(--chakra-spacing-2);
+}
+
+.post-details-page__icon {
+    color: var(--chakra-colors-brand-400);
+}
+
+.post-details-page__section-title {
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letter-spacings-wider);
+}
+
+.post-details-page__count {
+    color: var(--chakra-colors-fg-muted);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.post-details-page__sort {
+    max-width: 140px;
+}
+
+.post-details-page__comments {
+    gap: var(--chakra-spacing-4);
+}
+
+.post-details-page__blocked {
+    margin-top: var(--chakra-spacing-4);
+    padding: var(--chakra-spacing-3);
+    border-width: 1px;
+    border-radius: var(--chakra-radii-md);
+    background: var(--chakra-colors-bg-subtle);
+}
+
+.post-details-page__blocked-title {
+    font-weight: var(--chakra-font-weights-medium);
+    font-size: var(--chakra-font-sizes-sm);
+}
+
+.post-details-page__blocked-text {
+    font-size: var(--chakra-font-sizes-sm);
+    color: var(--chakra-colors-fg-muted);
+    margin-top: var(--chakra-spacing-1);
+}
+
+.post-details-page__comment-input {
+    margin-top: var(--chakra-spacing-4);
+}
+
+.post-details-page__comment-submit {
+    margin-top: var(--chakra-spacing-2);
+}

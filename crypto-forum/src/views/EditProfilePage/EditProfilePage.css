@@ -1,0 +1,17 @@
+.edit-profile-page {
+    max-width: var(--chakra-sizes-2xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.edit-profile-page__heading {
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.edit-profile-page__form {
+    gap: var(--chakra-spacing-4);
+}
+
+.edit-profile-page__actions {
+    flex-direction: row;
+    gap: var(--chakra-spacing-3);
+}

@@ -10,10 +10,11 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
-import { supabase } from '../supabase/supabaseClient';
-import { updatePassword } from '../services/auth';
-import { toaster } from '../components/ui/toast-store.js';
-import PasswordInput from '../components/ui/PasswordInput.jsx';
+import { supabase } from '../../supabase/supabaseClient';
+import { updatePassword } from '../../services/auth';
+import { toaster } from '../../components/ui/toast-store.js';
+import PasswordInput from '../../components/ui/PasswordInput.jsx';
+import './ResetPasswordPage.css';
 
 const MIN_LENGTH = 6;
 
@@ -87,14 +88,14 @@ export function ResetPasswordPage() {
     };
 
     return (
-        <Container maxW="6xl" py={10}>
-            <Card.Root maxW="sm" mx="auto" mt={20}>
+        <Container className="reset-password-page">
+            <Card.Root className="reset-password-page__card">
                 <Card.Body>
-                    <Heading size="lg" mb={2}>Set a new password</Heading>
+                    <Heading size="lg" className="reset-password-page__heading">Set a new password</Heading>
 
                     {tokens === null ? (
-                        <Stack gap={4}>
-                            <Text color="fg.muted">
+                        <Stack className="reset-password-page__stack">
+                            <Text className="reset-password-page__muted">
                                 This link is invalid or has expired. Request a new one and
                                 open it in this browser.
                             </Text>
@@ -107,13 +108,13 @@ export function ResetPasswordPage() {
                         </Stack>
                     ) : (
                         <>
-                            <Text color="fg.muted" mb={6}>
+                            <Text className="reset-password-page__intro">
                                 Choose a password of at least {MIN_LENGTH} characters.
                                 You will be asked to log in with it afterwards.
                             </Text>
 
                             <form onSubmit={handleSubmit}>
-                                <Stack gap={4}>
+                                <Stack className="reset-password-page__stack">
                                     <Field.Root required>
                                         <Field.Label>New password</Field.Label>
 
@@ -136,7 +137,7 @@ export function ResetPasswordPage() {
                                         />
 
                                         {confirm.length > 0 && confirm !== password && (
-                                            <Field.HelperText color="red.500">
+                                            <Field.HelperText className="reset-password-page__error">
                                                 The passwords do not match
                                             </Field.HelperText>
                                         )}

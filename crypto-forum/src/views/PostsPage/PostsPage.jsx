@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { deletePost, getPosts } from "../services/posts";
-import { formatDate } from "../utils/formatDate";
-import { useAuth } from '../hooks/useAuth';
-import { canModerate } from '../utils/roles.js';
-import { getAvatarUrl } from '../services/profiles';
+import { deletePost, getPosts } from "../../services/posts.js";
+import { formatDate } from "../../utils/formatDate.js";
+import { useAuth } from '../../hooks/useAuth.js';
+import { canModerate } from '../../utils/roles.js';
+import { getAvatarUrl } from '../../services/profiles.js';
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import {
     Avatar,
@@ -21,10 +21,11 @@ import {
     Stack,
     Text,
 } from "@chakra-ui/react";
-import { toaster } from '../components/ui/toast-store.js';
-import { Header } from '../components/ui/Header.jsx';
+import { toaster } from '../../components/ui/toast-store.js';
+import { Header } from '../../components/ui/Header.jsx';
 import { LuPencil, LuTrash2 } from 'react-icons/lu';
-import DeletePostDialog from '../components/ui/DeletePostDialog.jsx';
+import DeletePostDialog from '../../components/ui/DeletePostDialog.jsx';
+import './PostsPage.css';
 
 function PostsPage() {
     const { user, profile } = useAuth();
@@ -85,10 +86,10 @@ function PostsPage() {
 
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="posts-page">
             <Header />
 
-            <HStack justify="space-between" mb={6}>
+            <HStack className="posts-page__header">
                 <Heading>Posts</Heading>
 
                 <Button
@@ -99,7 +100,7 @@ function PostsPage() {
                 </Button>
             </HStack>
 
-            <HStack mb={6} gap={4} wrap="wrap">
+            <HStack className="posts-page__filters">
                 <Input
                     type="text"
                     placeholder="Search posts..."
@@ -108,10 +109,10 @@ function PostsPage() {
                         setSearch(event.target.value)
                         setCurrentPage(1)
                     }}
-                    maxW="sm"
+                    className="posts-page__search"
                 />
 
-                <NativeSelect.Root maxW="200px">
+                <NativeSelect.Root className="posts-page__select">
                     <NativeSelect.Field
                         value={sort}
                         onChange={(event) => {
@@ -125,7 +126,7 @@ function PostsPage() {
                     <NativeSelect.Indicator />
                 </NativeSelect.Root>
 
-                <NativeSelect.Root maxW="200px">
+                <NativeSelect.Root className="posts-page__select">
                     <NativeSelect.Field
                         value={filter}
                         onChange={(event) => {
@@ -141,29 +142,27 @@ function PostsPage() {
             </HStack>
 
             {loading ? (
-                <Center py={10}>
+                <Center className="posts-page__loading">
                     <Spinner size="lg" />
                 </Center>
             ) : posts.length === 0 ? (
                 <Text>No posts available.</Text>
             ) : (
-                <Stack gap={6}>
+                <Stack className="posts-page__list">
                     {posts.map((post) => (
-                        <Box key={post.id} as="article" borderWidth="1px" borderRadius="md" p={4}>
+                        <Box key={post.id} as="article" className="posts-page__post">
                             <Heading size="md" asChild>
                                 <RouterLink to={`/posts/${post.id}`}>{post.title}</RouterLink>
                             </Heading>
 
-                            <Text mt={2}>{post.content}</Text>
+                            <Text className="posts-page__content">{post.content}</Text>
 
-                            <Flex align="center" gap={3} mt={2}>
+                            <Flex className="posts-page__meta">
                                 <Link asChild>
                                     <RouterLink to={`/users/${post.author_id}`}>
                                         <Avatar.Root
                                             size="sm"
-                                            borderRadius="full"
-                                            overflow="hidden"
-                                            flexShrink={0}
+                                            className="posts-page__avatar"
                                         >
                                             <Avatar.Fallback
                                                 name={post.profiles.username}
@@ -181,7 +180,7 @@ function PostsPage() {
                                     </RouterLink>
                                 </Link>
 
-                                <Text color="fg.muted">
+                                <Text className="posts-page__byline">
                                     by{' '}
                                     <Link asChild>
                                         <RouterLink to={`/users/${post.author_id}`}>
@@ -192,12 +191,12 @@ function PostsPage() {
                                     {formatDate(post.created_at)}
                                 </Text>
                             </Flex>
-                            <Text mt={1} color="fg.muted" fontSize="sm">
+                            <Text className="posts-page__comment-count">
                                 {post.commentCount} {post.commentCount === 1 ? 'comment' : 'comments'}
                             </Text>
 
                             {(post.author_id === user.id || isModerator) && (
-                                <HStack mt={4}>
+                                <HStack className="posts-page__actions">
                                     <Button
                                         size="sm"
                                         variant="ghost"

@@ -1,0 +1,50 @@
+.edit-post-page {
+    max-width: var(--chakra-sizes-4xl);
+    padding-block: var(--chakra-spacing-10);
+}
+
+.edit-post-page--narrow {
+    max-width: var(--chakra-sizes-2xl);
+}
+
+.edit-post-page__loading {
+    padding-block: var(--chakra-spacing-20);
+}
+
+.edit-post-page__notice {
+    padding: var(--chakra-spacing-4);
+    border-width: 1px;
+    border-radius: var(--chakra-radii-md);
+    background: var(--chakra-colors-bg-subtle);
+}
+
+.edit-post-page__notice-title {
+    font-weight: var(--chakra-font-weights-medium);
+}
+
+.edit-post-page__notice-text {
+    margin-top: var(--chakra-spacing-1);
+    color: var(--chakra-colors-fg-muted);
+}
+
+.edit-post-page__back {
+    margin-top: var(--chakra-spacing-4);
+}
+
+.edit-post-page__heading {
+    margin-top: var(--chakra-spacing-8);
+    margin-bottom: var(--chakra-spacing-6);
+}
+
+.edit-post-page__form {
+    gap: var(--chakra-spacing-4);
+}
+
+.edit-post-page__content {
+    resize: vertical;
+}
+
+.edit-post-page__actions {
+    flex-direction: row;
+    gap: var(--chakra-spacing-3);
+}

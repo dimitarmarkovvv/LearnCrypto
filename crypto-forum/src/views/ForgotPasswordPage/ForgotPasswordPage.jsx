@@ -11,9 +11,10 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
-import { sendPasswordReset } from '../services/auth';
-import { toaster } from '../components/ui/toast-store.js';
-import { Header } from '../components/ui/Header.jsx';
+import { sendPasswordReset } from '../../services/auth';
+import { toaster } from '../../components/ui/toast-store.js';
+import { Header } from '../../components/ui/Header.jsx';
+import './ForgotPasswordPage.css';
 
 export function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -39,16 +40,16 @@ export function ForgotPasswordPage() {
     };
 
     return (
-        <Container maxW="6xl" py={10}>
+        <Container className="forgot-password-page">
             <Header />
 
-            <Card.Root maxW="sm" mx="auto" mt={10}>
+            <Card.Root className="forgot-password-page__card">
                 <Card.Body>
                     {sentTo ? (
-                        <Stack gap={4}>
+                        <Stack className="forgot-password-page__stack">
                             <Heading size="lg">Check your inbox</Heading>
 
-                            <Text color="fg.muted">
+                            <Text className="forgot-password-page__muted">
                                 If an account exists for <strong>{sentTo}</strong>, we have
                                 sent it a link to reset the password. The link expires
                                 after a short while.
@@ -60,15 +61,15 @@ export function ForgotPasswordPage() {
                         </Stack>
                     ) : (
                         <>
-                            <Heading size="lg" mb={2}>Forgot password</Heading>
+                            <Heading size="lg" className="forgot-password-page__heading">Forgot password</Heading>
 
-                            <Text color="fg.muted" mb={6}>
+                            <Text className="forgot-password-page__intro">
                                 Enter the email you signed up with and we will send you a
                                 link to set a new password.
                             </Text>
 
                             <form onSubmit={handleSubmit}>
-                                <Stack gap={4}>
+                                <Stack className="forgot-password-page__stack">
                                     <Field.Root required>
                                         <Field.Label>Email</Field.Label>
 
@@ -88,7 +89,7 @@ export function ForgotPasswordPage() {
                                         Send reset link
                                     </Button>
 
-                                    <Link asChild fontSize="sm" alignSelf="center">
+                                    <Link asChild className="forgot-password-page__back">
                                         <RouterLink to="/login">Back to login</RouterLink>
                                     </Link>
                                 </Stack>

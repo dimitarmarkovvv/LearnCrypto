@@ -232,6 +232,7 @@ function Comment({
                                         size="xs"
                                         variant="ghost"
                                         colorPalette="red"
+                                        disabled={isBlocked}
                                         onClick={() =>
                                             setCommentToDelete(comment.id)
                                         }

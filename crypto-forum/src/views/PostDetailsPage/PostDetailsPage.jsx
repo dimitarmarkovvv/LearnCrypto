@@ -226,6 +226,7 @@ function PostDetailsPage() {
                                 size="sm"
                                 variant="ghost"
                                 colorPalette="red"
+                                disabled={profile?.is_blocked}
                                 onClick={() => setDeleteOpen(true)}
                             >
                                 <LuTrash2 /> Delete

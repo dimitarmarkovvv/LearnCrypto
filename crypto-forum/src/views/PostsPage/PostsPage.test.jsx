@@ -88,4 +88,37 @@ describe('PostsPage permissions', () => {
             screen.getByRole('button', { name: /Delete/ })
         ).toBeInTheDocument();
     });
+
+    it('offers neither to a blocked moderator', async () => {
+        useAuth.mockReturnValue({
+            user: { id: 'moderator-1' },
+            profile: { is_blocked: true, role: 'moderator' },
+        });
+
+        renderPage();
+
+        expect(
+            await screen.findByText(somebodyElsesPost.title)
+        ).toBeInTheDocument();
+        expect(
+            screen.queryByRole('button', { name: /Edit/ })
+        ).not.toBeInTheDocument();
+        expect(
+            screen.queryByRole('button', { name: /Delete/ })
+        ).not.toBeInTheDocument();
+    });
+
+    it('disables both for a blocked author on his own post', async () => {
+        useAuth.mockReturnValue({
+            user: { id: 'user-2' },
+            profile: { is_blocked: true, role: 'user' },
+        });
+
+        renderPage();
+
+        expect(
+            await screen.findByRole('button', { name: /Edit/ })
+        ).toBeDisabled();
+        expect(screen.getByRole('button', { name: /Delete/ })).toBeDisabled();
+    });
 });

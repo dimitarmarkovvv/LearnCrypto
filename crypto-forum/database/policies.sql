@@ -61,6 +61,7 @@ using (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 )
 with check (
@@ -69,6 +70,7 @@ with check (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 );
 
@@ -82,6 +84,7 @@ using (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 );
 
@@ -134,6 +137,7 @@ using (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 )
 with check (
@@ -142,6 +146,7 @@ with check (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 );
 
@@ -157,6 +162,7 @@ using (
         from public.profiles
         where id = auth.uid()
           and role in ('moderator', 'admin')
+          and is_blocked = false
     )
 );
 

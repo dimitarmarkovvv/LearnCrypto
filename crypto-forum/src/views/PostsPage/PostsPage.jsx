@@ -210,6 +210,7 @@ function PostsPage() {
                                         size="sm"
                                         variant="ghost"
                                         colorPalette="red"
+                                        disabled={profile?.is_blocked}
                                         onClick={() => setPostToDelete(post.id)}
                                     >
                                         <LuTrash2 /> Delete

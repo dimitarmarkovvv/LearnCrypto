@@ -111,6 +111,23 @@ describe('EditPostPage', () => {
         expect(navigate).not.toHaveBeenCalled();
     });
 
+    it('sends a blocked moderator away from a post by somebody else', async () => {
+        getPostById.mockResolvedValue({
+            ...ownPost,
+            author_id: 'someone-else',
+        });
+        useAuth.mockReturnValue({
+            user: { id: 'moderator-1' },
+            profile: { is_blocked: true, role: 'moderator' },
+        });
+
+        renderPage();
+
+        await vi.waitFor(() => {
+            expect(navigate).toHaveBeenCalledWith('/posts', { replace: true });
+        });
+    });
+
     it('saves the changes with trimmed values', async () => {
         updatePost.mockResolvedValue({ id: 'post-1' });
 

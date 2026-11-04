@@ -103,4 +103,11 @@ describe('Comment permissions', () => {
             screen.queryByRole('button', { name: 'Edit' })
         ).not.toBeInTheDocument();
     });
+
+    it('disables both for a blocked author on his own comment', () => {
+        renderComment({ userId: 'user-1', isBlocked: true });
+
+        expect(screen.getByRole('button', { name: 'Edit' })).toBeDisabled();
+        expect(screen.getByRole('button', { name: 'Delete' })).toBeDisabled();
+    });
 });

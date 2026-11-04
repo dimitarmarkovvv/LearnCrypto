@@ -75,6 +75,24 @@
     color: var(--chakra-colors-fg-muted);
 }
 
+.home-page__about {
+    gap: var(--chakra-spacing-4);
+}
+
+.home-page__about-title {
+    font-weight: var(--chakra-font-weights-semibold);
+    margin-bottom: var(--chakra-spacing-2);
+}
+
+.home-page__about-list {
+    gap: var(--chakra-spacing-1);
+    padding-inline-start: var(--chakra-spacing-5);
+}
+
+.home-page__about-note {
+    font-size: var(--chakra-font-sizes-sm);
+}
+
 .home-page__lists {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: var(--chakra-spacing-8);

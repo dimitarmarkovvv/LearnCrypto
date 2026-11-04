@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getForumStats, getMostCommentedPosts, getRecentPosts } from '../../services/homepage';
 import { formatDate } from '../../utils/formatDate.js'
-import { Box, Card, Center, Container, Flex, Grid, Heading, SimpleGrid, Spinner, Stack, Text, Link } from '@chakra-ui/react';
+import { Box, Card, Center, Container, Flex, Grid, Heading, SimpleGrid, Spinner, Stack, Text, Link, List } from '@chakra-ui/react';
 import { CryptoTicker } from '../../components/ui/CryptoTicker.jsx';
 import { Header } from '../../components/ui/Header.jsx';
 import { LuNewspaper, LuUsers, LuMessageSquare, LuChartNoAxesColumn } from 'react-icons/lu';
@@ -98,7 +98,22 @@ function HomePage() {
 
                 <Card.Root as="section">
                     <Card.Body>
-                        <Text className="home-page__muted">LearnCrypto is a community for discussing cryptocurrency news, trading strategies, and blockchain technology.</Text>
+                        <Stack className="home-page__about">
+                            <Text className="home-page__muted">LearnCrypto is a community for discussing cryptocurrency news, trading strategies, and blockchain technology.</Text>
+
+                            <Box>
+                                <Text className="home-page__about-title">What you can do here:</Text>
+
+                                <List.Root className="home-page__about-list home-page__muted">
+                                    <List.Item>Follow and discuss the latest crypto news</List.Item>
+                                    <List.Item>Share trading strategies and get honest feedback</List.Item>
+                                    <List.Item>Learn how blockchain technology works</List.Item>
+                                    <List.Item>Vote on the posts you find most useful</List.Item>
+                                </List.Root>
+                            </Box>
+
+                            <Text className="home-page__muted home-page__about-note">Posts reflect the views of their authors and are not financial advice.</Text>
+                        </Stack>
                     </Card.Body>
                 </Card.Root>
             </Grid>

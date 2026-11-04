@@ -190,7 +190,9 @@ Authorisation lives in the database, not in the interface. Hiding a button
 is a convenience; the policy is the protection. Worth knowing:
 
 - Blocked users keep read access and lose every write — posting, editing,
-  deleting and voting.
+  deleting and voting. This includes moderators: a blocked moderator keeps
+  the role but can no longer edit or delete any post or comment, including
+  their own, until an admin unblocks them.
 - The `email` column of `profiles` is not readable by the client at all.
   Admins see emails through `admin_search_users`, a `security definer`
   function that checks the caller's role before it returns anything.
@@ -210,9 +212,10 @@ is a convenience; the policy is the protection. Worth knowing:
 
 ## Screenshots
 
-**Homepage** — forum statistics, the live price ticker, and the two feeds.
+**Homepage** — forum statistics, what the community offers, the live price
+ticker, and the two feeds.
 
-![The homepage, with live statistics, the price ticker and the recent and most commented feeds](docs/screenshots/homepage.png)
+![The homepage, with live statistics, the community description, the price ticker and the recent and most commented feeds](docs/screenshots/homepage.png)
 
 **A post and its thread** — the author's avatar, voting, and the comments
 below, seen here by an administrator, who gets the edit and delete

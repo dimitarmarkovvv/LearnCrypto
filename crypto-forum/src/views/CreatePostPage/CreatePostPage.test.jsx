@@ -127,6 +127,13 @@ describe('CreatePostPage', () => {
         expect(await screen.findByText('Looks good')).toBeInTheDocument();
     });
 
+    it('connects the labels to their fields', () => {
+        renderPage();
+
+        expect(screen.getByLabelText(/Title/)).toHaveAttribute('required');
+        expect(screen.getByLabelText(/Content/)).toHaveAttribute('required');
+    });
+
     it('does not render the form for a blocked user', () => {
         useAuth.mockReturnValue({
             user: { id: 'user-1' },
@@ -136,7 +143,7 @@ describe('CreatePostPage', () => {
         renderPage();
 
         expect(
-            screen.getByText('You cannot Create posts')
+            screen.getByText('You cannot create posts')
         ).toBeInTheDocument();
         expect(
             screen.queryByRole('button', { name: 'Create Post' })

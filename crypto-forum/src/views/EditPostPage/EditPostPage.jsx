@@ -7,6 +7,15 @@ import { toaster } from '../../components/ui/toast-store.js';
 import { useAuth } from "../../hooks/useAuth.js";
 import { canModerate } from "../../utils/roles.js";
 import { Header } from '../../components/ui/Header.jsx';
+import {
+    POST_CONTENT_LENGTH_ERROR,
+    POST_CONTENT_MAX_LENGTH,
+    POST_CONTENT_MIN_LENGTH,
+    POST_CONTENT_ROWS,
+    POST_TITLE_LENGTH_ERROR,
+    POST_TITLE_MAX_LENGTH,
+    POST_TITLE_MIN_LENGTH,
+} from '../../constants/constants.js';
 import './EditPostPage.css';
 
 function EditPostPage() {
@@ -55,13 +64,13 @@ function EditPostPage() {
         const trimmedTitle = title.trim();
         const trimmedContent = content.trim();
 
-        if (trimmedTitle.length < 16 || trimmedTitle.length > 64) {
-            toaster.create({ title: 'Title must be between 16 and 64 characters.', type: 'error' });
+        if (trimmedTitle.length < POST_TITLE_MIN_LENGTH || trimmedTitle.length > POST_TITLE_MAX_LENGTH) {
+            toaster.create({ title: POST_TITLE_LENGTH_ERROR, type: 'error' });
             return;
         }
 
-        if (trimmedContent.length < 32 || trimmedContent.length > 8192) {
-            toaster.create({ title: 'Content must be between 32 and 8192 characters.', type: 'error' });
+        if (trimmedContent.length < POST_CONTENT_MIN_LENGTH || trimmedContent.length > POST_CONTENT_MAX_LENGTH) {
+            toaster.create({ title: POST_CONTENT_LENGTH_ERROR, type: 'error' });
             return;
         }
 
@@ -126,13 +135,10 @@ function EditPostPage() {
                     <Field.Root required>
                         <Field.Label>Title</Field.Label>
                         <Input
-                            type="text"
-                            id="title"
                             value={title}
                             onChange={(event) => setTitle(event.target.value)}
-                            minLength={16}
-                            maxLength={64}
-                            required
+                            minLength={POST_TITLE_MIN_LENGTH}
+                            maxLength={POST_TITLE_MAX_LENGTH}
                         />
                     </Field.Root>
 
@@ -140,14 +146,12 @@ function EditPostPage() {
                         <Field.Label>Content</Field.Label>
 
                         <Textarea
-                            id="content"
                             value={content}
                             onChange={(event) => setContent(event.target.value)}
-                            minLength={32}
-                            maxLength={8192}
-                            rows={14}
+                            minLength={POST_CONTENT_MIN_LENGTH}
+                            maxLength={POST_CONTENT_MAX_LENGTH}
+                            rows={POST_CONTENT_ROWS}
                             className="edit-post-page__content"
-                            required
                         />
                     </Field.Root>
 

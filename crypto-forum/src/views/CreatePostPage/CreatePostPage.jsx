@@ -6,6 +6,15 @@ import { Alert, Box, Button, Card, Container, Field, Flex, Heading, Input, Stack
 import { toaster } from '../../components/ui/toast-store.js';
 import { Header } from '../../components/ui/Header.jsx';
 import { LuPenLine } from 'react-icons/lu';
+import {
+    POST_CONTENT_LENGTH_ERROR,
+    POST_CONTENT_MAX_LENGTH,
+    POST_CONTENT_MIN_LENGTH,
+    POST_CONTENT_ROWS,
+    POST_TITLE_LENGTH_ERROR,
+    POST_TITLE_MAX_LENGTH,
+    POST_TITLE_MIN_LENGTH,
+} from '../../constants/constants.js';
 import './CreatePostPage.css';
 
 function CreatePostPage() {
@@ -27,7 +36,7 @@ function CreatePostPage() {
 
                     <Alert.Content>
                         <Alert.Title>
-                            You cannot Create posts
+                            You cannot create posts
                         </Alert.Title>
 
                         <Alert.Description>
@@ -51,13 +60,13 @@ function CreatePostPage() {
         const trimmedTitle = title.trim();
         const trimmedContent = content.trim();
 
-        if (trimmedTitle.length < 16 || trimmedTitle.length > 64) {
-            toaster.create({ title: 'Title must be between 16 and 64 characters.', type: 'error' });
+        if (trimmedTitle.length < POST_TITLE_MIN_LENGTH || trimmedTitle.length > POST_TITLE_MAX_LENGTH) {
+            toaster.create({ title: POST_TITLE_LENGTH_ERROR, type: 'error' });
             return;
         };
 
-        if (trimmedContent.length < 32 || trimmedContent.length > 8192) {
-            toaster.create({ title: 'Content must be between 32 and 8192 characters.', type: 'error' });
+        if (trimmedContent.length < POST_CONTENT_MIN_LENGTH || trimmedContent.length > POST_CONTENT_MAX_LENGTH) {
+            toaster.create({ title: POST_CONTENT_LENGTH_ERROR, type: 'error' });
             return;
         };
 
@@ -102,27 +111,24 @@ function CreatePostPage() {
                                 <Field.Label>Title</Field.Label>
 
                                 <Input
-                                    type="text"
-                                    id="title"
                                     placeholder="Ask something the forum can actually answer"
                                     value={title}
                                     onChange={(event) => setTitle(event.target.value)}
-                                    minLength={16}
-                                    maxLength={64}
-                                    required
+                                    minLength={POST_TITLE_MIN_LENGTH}
+                                    maxLength={POST_TITLE_MAX_LENGTH}
                                 />
 
                                 <Field.HelperText>
                                     <Text
                                         as="span"
-                                        className={title.length < 16 ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
+                                        className={title.length < POST_TITLE_MIN_LENGTH ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
                                     >
-                                        {title.length < 16
-                                            ? `${16 - title.length} more characters needed`
+                                        {title.length < POST_TITLE_MIN_LENGTH
+                                            ? `${POST_TITLE_MIN_LENGTH - title.length} more characters needed`
                                             : 'Looks good'}
                                     </Text>
                                     {' · '}
-                                    {title.length}/64
+                                    {title.length}/{POST_TITLE_MAX_LENGTH}
                                 </Field.HelperText>
                             </Field.Root>
 
@@ -130,28 +136,26 @@ function CreatePostPage() {
                                 <Field.Label>Content</Field.Label>
 
                                 <Textarea
-                                    id="content"
                                     placeholder="Give some context, then ask your question. Posts that explain the reasoning behind them get better replies."
                                     value={content}
                                     onChange={(event) => setContent(event.target.value)}
-                                    minLength={32}
-                                    maxLength={8192}
-                                    rows={14}
+                                    minLength={POST_CONTENT_MIN_LENGTH}
+                                    maxLength={POST_CONTENT_MAX_LENGTH}
+                                    rows={POST_CONTENT_ROWS}
                                     className="create-post-page__content"
-                                    required
                                 />
 
                                 <Field.HelperText>
                                     <Text
                                         as="span"
-                                        className={content.length < 32 ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
+                                        className={content.length < POST_CONTENT_MIN_LENGTH ? 'create-post-page__hint create-post-page__hint--error' : 'create-post-page__hint'}
                                     >
-                                        {content.length < 32
-                                            ? `${32 - content.length} more characters needed`
+                                        {content.length < POST_CONTENT_MIN_LENGTH
+                                            ? `${POST_CONTENT_MIN_LENGTH - content.length} more characters needed`
                                             : 'Looks good'}
                                     </Text>
                                     {' · '}
-                                    {content.length}/8192
+                                    {content.length}/{POST_CONTENT_MAX_LENGTH}
                                 </Field.HelperText>
                             </Field.Root>
 

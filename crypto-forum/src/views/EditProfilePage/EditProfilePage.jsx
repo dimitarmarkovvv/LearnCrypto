@@ -4,7 +4,24 @@ import { Button, Container, Field, Heading, Input, NativeSelect, Stack, Textarea
 import { toaster } from '../../components/ui/toast-store.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { updateProfile, uploadAvatar } from '../../services/profiles.js';
+import {
+    GENDER_OPTIONS,
+    PROFILE_LOCATION_LENGTH_ERROR,
+    PROFILE_LOCATION_MAX_LENGTH,
+    PROFILE_LOCATION_MIN_LENGTH,
+    PROFILE_NAME_LENGTH_ERROR,
+    PROFILE_NAME_MAX_LENGTH,
+    PROFILE_NAME_MIN_LENGTH,
+    PROFILE_SIGNATURE_MAX_LENGTH,
+} from '../../constants/constants.js';
 import './EditProfilePage.css';
+
+const isValidName = (name) =>
+    name.length >= PROFILE_NAME_MIN_LENGTH && name.length <= PROFILE_NAME_MAX_LENGTH;
+
+const isValidLocation = (location) =>
+    !location ||
+    (location.length >= PROFILE_LOCATION_MIN_LENGTH && location.length <= PROFILE_LOCATION_MAX_LENGTH);
 
 function EditProfilePage() {
     const { user, profile, refreshProfile } = useAuth();
@@ -21,6 +38,20 @@ function EditProfilePage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const trimmedFirstName = firstName.trim();
+        const trimmedLastName = lastName.trim();
+        const trimmedLocation = location.trim();
+
+        if (!isValidName(trimmedFirstName) || !isValidName(trimmedLastName)) {
+            toaster.create({ title: PROFILE_NAME_LENGTH_ERROR, type: 'error' });
+            return;
+        }
+
+        if (!isValidLocation(trimmedLocation)) {
+            toaster.create({ title: PROFILE_LOCATION_LENGTH_ERROR, type: 'error' });
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -29,11 +60,11 @@ function EditProfilePage() {
             }
 
             await updateProfile(user.id, {
-                first_name: firstName,
-                last_name: lastName,
-                location,
-                signature,
-                gender,
+                first_name: trimmedFirstName,
+                last_name: trimmedLastName,
+                location: trimmedLocation || null,
+                signature: signature.trim() || null,
+                gender: gender || null,
             });
 
             await refreshProfile();
@@ -52,24 +83,43 @@ function EditProfilePage() {
 
             <form onSubmit={handleSubmit}>
                 <Stack className="edit-profile-page__form">
-                    <Field.Root>
+                    <Field.Root required>
                         <Field.Label>First Name</Field.Label>
-                        <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <Input
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            minLength={PROFILE_NAME_MIN_LENGTH}
+                            maxLength={PROFILE_NAME_MAX_LENGTH}
+                        />
                     </Field.Root>
 
-                    <Field.Root>
+                    <Field.Root required>
                         <Field.Label>Last Name</Field.Label>
-                        <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <Input
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            minLength={PROFILE_NAME_MIN_LENGTH}
+                            maxLength={PROFILE_NAME_MAX_LENGTH}
+                        />
                     </Field.Root>
 
                     <Field.Root>
                         <Field.Label>Location</Field.Label>
-                        <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+                        <Input
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            minLength={PROFILE_LOCATION_MIN_LENGTH}
+                            maxLength={PROFILE_LOCATION_MAX_LENGTH}
+                        />
                     </Field.Root>
 
                     <Field.Root>
                         <Field.Label>Signature</Field.Label>
-                        <Textarea value={signature} onChange={(e) => setSignature(e.target.value)} maxLength={100} />
+                        <Textarea
+                            value={signature}
+                            onChange={(e) => setSignature(e.target.value)}
+                            maxLength={PROFILE_SIGNATURE_MAX_LENGTH}
+                        />
                     </Field.Root>
 
                     <Field.Root>
@@ -77,8 +127,9 @@ function EditProfilePage() {
                         <NativeSelect.Root>
                             <NativeSelect.Field value={gender} onChange={(e) => setGender(e.target.value)}>
                                 <option value="">—</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                {GENDER_OPTIONS.map(({ value, label }) => (
+                                    <option key={value} value={value}>{label}</option>
+                                ))}
                             </NativeSelect.Field>
                             <NativeSelect.Indicator />
                         </NativeSelect.Root>

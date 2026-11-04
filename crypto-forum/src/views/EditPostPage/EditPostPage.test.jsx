@@ -74,6 +74,15 @@ describe('EditPostPage', () => {
         expect(content).toHaveValue(ownPost.content);
     });
 
+    it('connects the labels to their fields', async () => {
+        renderPage();
+
+        await findFields();
+
+        expect(screen.getByLabelText(/Title/)).toHaveValue(ownPost.title);
+        expect(screen.getByLabelText(/Content/)).toHaveValue(ownPost.content);
+    });
+
     it('sends the author away from a post he did not write', async () => {
         getPostById.mockResolvedValue({
             ...ownPost,

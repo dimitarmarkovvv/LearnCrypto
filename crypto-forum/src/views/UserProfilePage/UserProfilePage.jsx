@@ -10,6 +10,7 @@ import { formatDate } from '../../utils/formatDate.js';
 import { getCommentsByAuthorId } from '../../services/comments.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { Header } from '../../components/ui/Header.jsx';
+import { PROFILE_POSTS_LIMIT } from '../../constants/constants.js';
 import './UserProfilePage.css';
 
 function MetaRow({ icon, text }) {
@@ -61,7 +62,7 @@ function UserProfilePage() {
 
                 const userPosts = await getPosts({
                     authorID: id,
-                    pageSize: 100,
+                    pageSize: PROFILE_POSTS_LIMIT,
                 });
 
                 setPosts(userPosts);
